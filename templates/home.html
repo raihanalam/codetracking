@@ -1,0 +1,78 @@
+{% extends 'base.html'%}
+{% load static %}
+{% load custom_filters %}
+
+{% block title%} CodeTrack | Home {% endblock%}
+
+
+{%block body_block%}
+<div class="theme">
+     <div class="th-body">
+          <h1>Code, Write, Learn</h1>
+          <p>Coding can be difficult, when you are alone.</p>
+          <a href="#" class="btn btn-warning">Start Writing</a>
+     </div>
+</div>
+<div class="container">
+     <div class="row" style="margin-top: 20px;">
+          <div  class="col-md-4">
+               <div id="tags">
+                    <a href="#" class="btn btn-primary btn-sm">Python</a>
+                    <a href="#" class="btn btn-primary btn-sm">Javascript</a>
+                    <a href="#" class="btn btn-primary btn-sm">Django</a>
+                    <a href="#" class="btn btn-primary btn-sm">React</a>
+                    <a href="#" class="btn btn-primary btn-sm">Bootstrap</a>
+                    <a href="#" class="btn btn-primary btn-sm">HTML</a>
+                    <a href="#" class="btn btn-primary btn-sm">CSS</a>
+                    <a href="#" class="btn btn-primary btn-sm">MySQL</a>
+                    <a href="#" class="btn btn-primary btn-sm">C</a>
+                    <a href="#" class="btn btn-primary btn-sm">C++</a>
+                    <a href="#" class="btn btn-primary btn-sm">Java</a>
+                    <a href="#" class="btn btn-primary btn-sm">Python</a>
+
+               </div>
+               <div id="build-app">
+                    <img src="{% static 'images/build-app.jpeg' %}" alt="cat-image" width="100%" >
+                    <a href="#" class="btn btn-success btn-lg">Build Your Django APP</a>
+               </div>
+               
+     
+          </div>
+          <div class="col-md-8">
+               <h3>RECENT BLOGS</h3>
+               <div class="smart-ul"></div>
+               
+               {% for blog in blogs %}
+                    {% if forloop.counter <= 5 %}
+                    <div id="home-blog">
+                         <h3>{{blog.blog_title }}</h3>
+                         <div class="bd-1">
+                              <h6><i>{{blog.publish_date}}</i></h6>
+                              <h6 style="margin-left: 5%;">Author: <a href="#">{{ blog.author}}</a></h6>
+                         </div>
+
+                         <div class="row">
+                              <div class="col-sm-4">
+                                   <img style="margin-top: 20px;" src="/media/{{blog.blog_image}}" alt="{{blog.blog_title}}" title="{{blog.blog_title}}" width="100%">
+                              </div>
+                              <div class="col-sm-8">
+                                   <p>
+                                        {{blog.blog_content | range_filter | linebreaks}}
+                                   </p>
+                                   <div class="bd-2">
+                                        <a href="{% url 'App_Blog:blog_details' slug=blog.slug %}" class="btn btn-warning btn-sm">Read More</a>
+                                        <h6 style="margin-left: 15px; font-size: 20px;"><i class="fas fa-thumbs-up"></i>{{blog.liked_blog.count}} <i style="margin-left: 10px;"class="fas fa-comments"></i>  {{blog.blog_comment.count}}</h6>
+                                   </div>
+                                   
+
+                              </div>
+                         </div>
+                    </div>
+                    {% endif %}
+               {% endfor %}
+               <a class="btn btn-light btn-sm" style="position: relative; left: 40%; margin: 5% 0;"href="{% url 'App_Blog:blog_list'%}">SEE MORE</a>
+          </div>
+     </div>
+</div>
+
+{% endblock %}

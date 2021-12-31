@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    {% block title %}
+               
+    {% endblock %}
+  </title>
+  <link rel="stylesheet" href="{% static 'css/style.css'%}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+          <a class="navbar-brand" href="{% url 'index' %}"><span style="font-size: 30px;"> <code>&#60;code&#62;</code><u>Track</u></span></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'App_Blog:blog_list' %}">Blog</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Course</a>
+              </li>
+            </ul>
+
+            <div class="nav-right">
+
+              {% if user.is_authenticated %}
+              <a href="{% url 'App_Blog:create_blog'%}" class="btn btn-success btn-sm" style="margin-right: 10px;">Write Blog</a>
+                <div class="nav-item dropdown btn btn-light btn-sm">
+                  <a href="#" id='navbardrop' class="nav-link dropdown-toggle" data-toggle="dropdown">
+                    <img src='/media/{{user.user_profile.profile_pic}}' class="rounded-circle" height="20px" width="20px">
+                    {{user.username}}
+                  </a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'App_Login:profile' %}">Profile</a>
+                    <a href="{% url 'App_Blog:my_blogs'%}" class="dropdown-item">My Blogs</a>
+                    <a class="dropdown-item" href="{% url 'App_Login:signout' %}">Signout</a>
+                  </div>
+                </div>
+                
+              {% else %}
+                <a href="{% url 'App_Login:signin' %}" class="btn btn-primary btn-sm">Signin</a>
+                <a href="{% url 'App_Login:signup' %}" class="btn btn-success btn-sm">Signup</a>
+              {% endif%}
+            </div>
+          </div>
+        </nav>
+        {%block body_block %}
+        
+        {%endblock%}
+
+        <div id="footer">
+          <div class="row">
+            <div class="col-md-4">
+              <h5>BLOG CATEGORY:</h5>
+              <div class="smart-ul"></div>
+              <ul>
+                <li>Python</li>
+                <li>Javascript</li>
+                <li>MySQL</li>
+                <li>Bootstrap</li>
+                <li>CSS</li>
+                <li>HTML</li>
+                <li>MySQL</li>
+                <li>Bootstrap</li>
+              </ul>
+  
+            </div>
+            <div class="col-md-4">
+              <h5>ABOUT</h5>
+              <div class="smart-ul"></div>
+              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti provident veritatis impedit itaque perferendis doloremque. Ut quis eaque itaque ab, aspernatur accusantium obcaecati amet optio vero minus. Quas itaque perferendis consequuntur assumenda fugit iste quam incidunt, reiciendis non molestias illo placeat, impedit soluta ut voluptatum magnam similique. Dignissimos, nihil nulla?</p>
+              
+            </div>
+            <div class="col-md-4">
+              <h5>CONSULTANCY:</h5>
+              <div class="smart-ul"></div>
+              <p>systemstack.digital</p>
+              <h5>CONTACT</h5>
+              <div class="smart-ul"></div>
+              <P>send@codetrack.com</P>
+            </div>
+          </div>
+          <p> © 2021 CodeTrack.com All Rights Reserved.</p>
+        </div>
+        
+</body>
+</html>

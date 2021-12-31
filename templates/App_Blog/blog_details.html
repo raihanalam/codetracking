@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title%} {{blog.blog_title}} {% endblock %}
+
+
+{% block body_block %}
+<div class="container">
+     <div class="row">
+          <div class="col-6">
+               <h2>{{blog.blog_title}}</h2>
+               <h4>Posted By: {{blog.author}}</h4>
+               <i><h6>Publish On: {{blog.publish_date}}</h6></i>
+               <i><h6>Updated On: {{blog.update_date}}</h6></i>
+
+               <h6>{{blog.liked_blog.count}} Likes | {{blog.blog_comment.count}} Comments</h6>
+               
+          </div>
+          <div class="col-6">
+               <img src="/media/{{blog.blog_image}}" alt="{{blog.blog_title}}" width="100%">
+          </div>
+          <p>
+               {{blog.blog_content | linebreaks}}
+          </p>
+     </div>
+     <hr>
+     {% if user.is_authenticated %}
+          {% if not liked%}
+          <a href="{% url 'App_Blog:liked_post' pk=blog.pk%}"><i class="fas fa-thumbs-up fa-2x"></i></a>
+          {% else %}
+          <a href="{% url 'App_Blog:unliked_post' pk=blog.pk%}"><i class="fas fa-thumbs-down fa-2x"></i></a>
+          {% endif %} 
+          <hr>
+          <div class="row">
+               <div class="col-6">
+                    <h3>Comments:</h3>
+                    {% for comment in blog.blog_comment.all%}
+                    <p><a href="#">@{{comment.user}}</a> > {{comment.comment}}</p>
+                    <h6>{{comment.comment_date}}</h6>
+                    <hr>
+                    {% endfor %}
+               </div>
+               <div class="col-6">
+                    <form method="POST">
+                         {{comment_form | crispy}}
+                         {% csrf_token %}
+                         <button type="submit" class="btn btn-primary btn-sm">Comment</buuton>
+                    </form>
+               </div>
+          </div>
+     {% else %}
+     <div class="row">
+          <div class="col-6">
+               <h3>Comments:</h3>
+               {% for comment in blog.blog_comment.all%}
+               <p><a href="#">@{{comment.user}}</a> > {{comment.comment}}</p>
+               <h6>{{comment.comment_date}}</h6>
+               <hr>
+               {% endfor %}
+          </div>
+          <div class="col-6">
+               <p>You are not allowed to like and comment in a post untill you are not a rgisterd user.</p>
+               
+          </div>
+     </div>
+          
+     {% endif %}
+</div>
+<br>
+<br>
+
+{% endblock %}
