@@ -1,5 +1,5 @@
 #!/bin/sh
-'''exec' "/home/raihan/Desktop/Ground/Django Projects/Blog/env/bin/python3" "$0" "$@"
+'''exec' "/home/raihan/Desktop/Ground/Django Projects/Blog/CodeTracking/env/bin/python3" "$0" "$@"
 ' '''
 # -*- coding: utf-8 -*-
 import re
