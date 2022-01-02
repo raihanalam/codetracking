@@ -3,15 +3,20 @@
 
 {% load custom_filters %}
 
-{% block title%} CodeTrack | Home {% endblock%}
+{% block title%} CodeTracking | Home {% endblock%}
 
 
 {%block body_block%}
 <div class="theme">
-     <div class="th-body">
+     <div id="th-body">
           <h1>Code, Write, Learn</h1>
           <p>Coding can be difficult, when you are alone.</p>
-          <a href="#" class="btn btn-warning">Start Writing</a>
+          {% if user.is_authenticated%}
+               <a href="{% url 'App_Blog:create_blog'%}" class="btn btn-light">Start Writing</a>
+          {% else %}
+               <a href="{% url 'App_Login:signin'%}" class="btn btn-light">Start Writing</a>
+          {% endif%}
+
      </div>
 </div>
 <div class="container">
@@ -28,8 +33,6 @@
                     <a href="#" class="btn btn-primary btn-sm">MySQL</a>
                     <a href="#" class="btn btn-primary btn-sm">C</a>
                     <a href="#" class="btn btn-primary btn-sm">C++</a>
-                    <a href="#" class="btn btn-primary btn-sm">Java</a>
-                    <a href="#" class="btn btn-primary btn-sm">Python</a>
 
                </div>
                <div id="build-app">
@@ -46,7 +49,7 @@
                {% for blog in blogs %}
                     {% if forloop.counter <= 5 %}
                     <div id="home-blog">
-                         <h3>{{blog.blog_title }}</h3>
+                         <h3 style="font-family:Verdana, Geneva, Tahoma, sans-serif;">{{blog.blog_title }}</h3>
                          <div class="bd-1">
                               <h6><i>{{blog.publish_date}}</i></h6>
                               <h6 style="margin-left: 5%;">Author: <a href="#">{{ blog.author}}</a></h6>
@@ -54,14 +57,14 @@
 
                          <div class="row">
                               <div class="col-sm-4">
-                                   <img style="margin-top: 20px;" src="/media/{{blog.blog_image}}" alt="{{blog.blog_title}}" title="{{blog.blog_title}}" width="100%">
+                                   <img style="margin-top: 20px;" src="/media/{{blog.blog_image}}" alt="{{blog.blog_title}}" title="{{blog.blog_title}}" width="100%" height="120px">
                               </div>
                               <div class="col-sm-8">
                                    <p>
                                         {{blog.blog_content | range_filter | linebreaks}}
                                    </p>
                                    <div class="bd-2">
-                                        <a href="{% url 'App_Blog:blog_details' slug=blog.slug %}" class="btn btn-warning btn-sm">Read More</a>
+                                        <a href="{% url 'App_Blog:blog_details' slug=blog.slug %}" class="btn btn-info btn-sm">Read More</a>
                                         <h6 style="margin-left: 15px; font-size: 20px;"><i class="fas fa-thumbs-up"></i>{{blog.liked_blog.count}} <i style="margin-left: 10px;"class="fas fa-comments"></i>  {{blog.blog_comment.count}}</h6>
                                    </div>
                                    
@@ -71,7 +74,7 @@
                     </div>
                     {% endif %}
                {% endfor %}
-               <a class="btn btn-light btn-sm" style="position: relative; left: 40%; margin: 5% 0;"href="{% url 'App_Blog:blog_list'%}">SEE MORE</a>
+               <a class="btn btn-light btn-sm" style="position: relative; left: 40%; margin: 5% 0;" href="{% url 'App_Blog:blog_list'%}">SEE MORE</a>
           </div>
      </div>
 </div>

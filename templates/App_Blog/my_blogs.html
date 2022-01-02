@@ -6,21 +6,21 @@
 
 {% block body_block %}
 
-<div class="container">
+<div class="container" style="margin: 20px 0">
      {% for blog in user.post_author.all %}
-     <h3>{{blog.blog_title}}</h3>
-     <h6>{{blog.publish_date}}</h6> 
-     <i class="fas fa-thumbs-up"></i>{{blog.liked_blog.count}} | <i class="fas fa-comments"></i>  {{blog.blog_comment.count}}
-     <div class="row">
-          <div class="col-sm-4">
-               <img src="/media/{{blog.blog_image}}" alt="" width="100%">
+     <div id="home-blog">
+          <h3>{{blog.blog_title}}</h3>
+          <h6>Published:{{blog.publish_date}} | Updated On: {{blog.update_date}} </h6> 
+          <i class="fas fa-thumbs-up"></i>{{blog.liked_blog.count}} | <i class="fas fa-comments"></i>  {{blog.blog_comment.count}}
+          <div class="row">
+               <div class="col-sm-4">
+                    <img src="/media/{{blog.blog_image}}" alt="" width="100%">
+               </div>
+               <div class="col-sm-8">
+                    {{blog.blog_content | range_filter | linebreaks}}
+                    <a class="btn btn-info btn-sm" href="{% url 'App_Blog:blog_details' slug=blog.slug %}">See More</a> <a class="btn btn-sm btn-warning" href="{% url 'App_Blog:edit_blog' pk=blog.pk %}">Edit Blog</a>
+               </div>
           </div>
-          <div class="col-sm-8">
-               {{blog.blog_content | range_filter | linebreaks}}
-               <a href="{% url 'App_Blog:blog_details' slug=blog.slug %}">See More</a>
-
-          </div>
-          <a href="{% url 'App_Blog:edit_blog' pk=blog.pk %}">Edit Blog</a>
      </div>
 
 

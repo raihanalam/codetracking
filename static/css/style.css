@@ -1,7 +1,10 @@
+.container{
+     margin: 20px 0;
+}
 .theme{
      width: 100%;
 }
-.theme> .th-body{
+#th-body{
      display: flex;
      flex-direction: column;
      justify-content: center;
@@ -11,12 +14,12 @@
      color: white;
      padding: 40px 0px;
 }
-.theme> .th-body >p , h1{
+#th-body >p , h1{
      text-align: center;
 }
 .smart-ul{
      height: 5px;
-     width: 50%;
+     width: 100%;
      background-color: rgb(94, 94, 218);
      margin: 10px 0;
 }
@@ -40,20 +43,26 @@
 #home-blog:hover{
      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+#home-blog .bd-1>h6{
+     font-size: 15px;
+}
 #home-blog .bd-1, .bd-2{
      display: flex;
 }
 #footer{
      background-color: rgb(58, 61, 82);
      color: white;
-     padding: 10px;
      width: 100%;
      padding: 20px;
 }
-#footer > p{
-     text-align: center;
-     padding-top: 10px;
-     margin-top: 20px;
+#foot-p{
      text-align: center; 
-     border-top: 2px solid white;
+     border-top: 1px solid white;
+}
+#foot-ul>li>a{
+     text-decoration: none;
+     color: white;
+}
+#foot-ul>li>a:hover{
+     color: rgb(99, 126, 243);
 }
