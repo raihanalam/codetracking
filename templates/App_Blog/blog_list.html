@@ -10,9 +10,10 @@
      {% for blog in blogs %}
      <div class="col-md-4">
           <a href="{% url 'App_Blog:blog_details' slug=blog.slug %}">
-               <h3 style="font-size: 16px;">{{blog.blog_title }}</h3>
+               
                <img src="/media/{{blog.blog_image}}" alt="{{blog.blog_title}}" title="{{blog.blog_title}}" width="100%">
                <h6><i>{{blog.publish_date}}</i></h6>
+               <h3 style="font-size: 16px; text-decoration: none;">{{blog.blog_title }}</h3>
           </a>
      </div>
      {% endfor %}
