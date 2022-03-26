@@ -1,4 +1,4 @@
-from django.db.models import fields
+import imp
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DeleteView, UpdateView, DetailView, View, TemplateView, ListView
@@ -18,7 +18,7 @@ class MyBlogs(LoginRequiredMixin,TemplateView):
 class CreateBlog(LoginRequiredMixin, CreateView):
      model = Blog
      template_name = 'App_Blog/create_blog.html'
-     fields = ('blog_title','blog_content','blog_image',)
+     fields = ('category','blog_title','blog_content','blog_image',)
 
      def form_valid(self,form):
           blog_obj = form.save(commit=False)
@@ -94,3 +94,16 @@ class UpdateBlog(LoginRequiredMixin, UpdateView):
 
      def get_success_url(self,**kwargs):
           return reverse_lazy('App_Blog:blog_details', kwargs={'slug':self.object.slug})
+
+
+def delete_blog(request,pk):
+     user = request.user
+     post = Blog.objects.get(pk=pk,author=user)
+
+     if post:
+          post.delete()
+     else:
+          print('No Post')
+
+     return HttpResponseRedirect(reverse('App_Blog:my_blogs'))
+

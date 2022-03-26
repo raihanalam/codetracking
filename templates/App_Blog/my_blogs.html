@@ -17,8 +17,8 @@
                     <img src="/media/{{blog.blog_image}}" alt="" width="100%">
                </div>
                <div class="col-sm-8">
-                    {{blog.blog_content | range_filter | linebreaks}}
-                    <a class="btn btn-info btn-sm" href="{% url 'App_Blog:blog_details' slug=blog.slug %}">See More</a> <a class="btn btn-sm btn-warning" href="{% url 'App_Blog:edit_blog' pk=blog.pk %}">Edit Blog</a>
+                    {{blog.blog_content|safe|slice:250}}
+                    <a class="btn btn-info btn-sm" href="{% url 'App_Blog:blog_details' slug=blog.slug %}">See More</a> <a class="btn btn-sm btn-warning" href="{% url 'App_Blog:edit_blog' pk=blog.pk %}">Edit Blog</a> <a class="btn btn-sm btn-warning" href="{% url 'App_Blog:delete_blog' pk=blog.pk %}">Delete Blog</a>
                </div>
           </div>
      </div>

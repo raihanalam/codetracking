@@ -7,6 +7,7 @@
 <div class="container">
      {% if blog.author ==  user %}
      <form method="POST" enctype="multipart/form-data">
+          {{form.media}}
           {{form | crispy}}
           {% csrf_token%}
           <button type="submit" class="btn btn-warning btn-sm">Upadate</button>

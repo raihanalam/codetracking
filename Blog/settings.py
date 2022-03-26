@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'App_Blog',
     'crispy_forms',
     'django_cleanup.apps.CleanupConfig',
+    'ckeditor',
 ]
 
 #We can use bootstrap, bootstrap3, bootstrap4, uni-form
@@ -145,3 +146,9 @@ LOGIN_URL = '/account/signin/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'width': '100%'
+    },
+}

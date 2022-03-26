@@ -26,18 +26,22 @@
                     <a href="#" class="btn btn-primary btn-sm">Python</a>
                     <a href="#" class="btn btn-primary btn-sm">Javascript</a>
                     <a href="#" class="btn btn-primary btn-sm">Django</a>
+                    <a href="#" class="btn btn-primary btn-sm">NodeJS</a>
                     <a href="#" class="btn btn-primary btn-sm">React</a>
+                    <a href="#" class="btn btn-primary btn-sm">jQuery</a>
                     <a href="#" class="btn btn-primary btn-sm">Bootstrap</a>
                     <a href="#" class="btn btn-primary btn-sm">HTML</a>
                     <a href="#" class="btn btn-primary btn-sm">CSS</a>
                     <a href="#" class="btn btn-primary btn-sm">MySQL</a>
-                    <a href="#" class="btn btn-primary btn-sm">C</a>
+                    <a href="#" class="btn btn-primary btn-sm">PostgreSQL</a>
                     <a href="#" class="btn btn-primary btn-sm">C++</a>
+                    <a href="#" class="btn btn-primary btn-sm">C</a>
+                    
 
                </div>
                <div id="build-app">
                     <img src="{% static 'images/build-app.jpg' %}" alt="cat-image" width="100%" >
-                    <a href="#" class="btn btn-success btn-lg">Build Your Django APP</a>
+                    <a href="#" class="btn btn-success btn-lg">Build Your Web App Now</a>
                </div>
                
      
@@ -61,7 +65,8 @@
                               </div>
                               <div class="col-sm-8">
                                    <p>
-                                        {{blog.blog_content | range_filter | linebreaks}}
+                                        {{blog.blog_content|safe|slice:250}}
+
                                    </p>
                                    <div class="bd-2">
                                         <a href="{% url 'App_Blog:blog_details' slug=blog.slug %}" class="btn btn-info btn-sm">Read More</a>

@@ -7,6 +7,7 @@
 <div class="container">
      <h2> Write Your Blog</h2>
      <form method="POST" enctype="multipart/form-data">
+          {{form.media}}
           {{form | crispy}}
           {% csrf_token %}
           <br><br>
